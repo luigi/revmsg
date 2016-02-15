@@ -12,6 +12,12 @@ API versioning is done through the URL: `/api/v0/...`. Content negotiation throu
 
 ## Trying out the API ##
 
+Install dependencies:
+
+```
+$ npm install
+```
+
 Start the server:
 
 ```
@@ -20,7 +26,7 @@ $ npm start
 
 The server pre-loads a single resource at `id: 1`:
 
-http://localhost:2727/api/v0/1
+[http://localhost:2727/api/v0/legislators/1](http://localhost:2727/api/v0/legislators/1)
 
 To exercise the POST endpoint:
 
@@ -28,7 +34,11 @@ To exercise the POST endpoint:
 $ curl -X POST -H 'Content-Type: application/json' -d '{"id": 2, "name": "Arya Stark", "state": "AK", "district": 2, "political_party": "assassin", "term_starts_on": "2016-06-01", "term_ends_on": "2018-06-01"}' http://localhost:2727/api/v0/legislators
 ```
 
-To see a validation error when POST'ing (incorrect format for `state`):
+The resource will then be available at:
+
+[http://localhost:2727/api/v0/legislators/2](http://localhost:2727/api/v0/legislators/2)
+
+To see a validation error when POST'ing an incorrect format for `state`:
 
 ```
 $ curl -X POST -H 'Content-Type: application/json' -d '{"id": 3, "name": "Jon Snow", "state": "The Wall", "district": 5, "political_party": "crow", "term_starts_on": "2016-06-01", "term_ends_on": "2018-06-01"}' http://localhost:2727/api/v0/legislators
@@ -36,7 +46,7 @@ $ curl -X POST -H 'Content-Type: application/json' -d '{"id": 3, "name": "Jon Sn
 
 ## Running the tests ##
 
-To keep things simple, I only tested for the correct HTTP codes.
+To keep things simple, I only tested for the correct HTTP codes. Ensure the server is stopped, then run:
 
 ```
 $ npm test
